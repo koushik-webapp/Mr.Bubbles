@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #C9A84C;
+  --color-gold-light: #E8C97A;
+  --color-gold-dark: #9A7A2E;
+  --color-obsidian: #FAFAF8;
+  --font-display: 'Bangers', system-ui;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #FAFAF8;
+  color: #1C1C1A;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.font-display { font-family: 'Bangers', system-ui; letter-spacing: 0.12em; }
+
+.gold-text {
+  background: linear-gradient(135deg, #9A7A2E 0%, #C9A84C 30%, #F0D060 55%, #C9A84C 70%, #9A7A2E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+::selection { background: rgba(201, 168, 76, 0.25); color: #1C1C1A; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #FAFAF8; }
+::-webkit-scrollbar-thumb { background: rgba(201, 168, 76, 0.35); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #C9A84C; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-18px); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translateY(0px) scale(1); opacity: 0.5; }
+  50% { transform: translateY(-12px) scale(1.04); opacity: 1; }
+}
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes spinSlowReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes shimmerText {
+  0% { background-position: -300% center; }
+  100% { background-position: 300% center; }
+}
+@keyframes pulse-gold {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.animate-float { animation: float 4.5s ease-in-out infinite; }
+.animate-float-b { animation: floatB 5.5s ease-in-out infinite 0.8s; }
+.animate-float-c { animation: float 6s ease-in-out infinite 2s; }
+.animate-float-d { animation: floatB 4s ease-in-out infinite 3.2s; }
+.animate-spin-slow { animation: spinSlow 22s linear infinite; }
+.animate-spin-reverse { animation: spinSlowReverse 30s linear infinite; }
+.animate-marquee { animation: marquee 28s linear infinite; }
+.animate-pulse-gold { animation: pulse-gold 3s ease-in-out infinite; }
+
+.shimmer-gold {
+  background: linear-gradient(90deg, #9A7A2E 0%, #C9A84C 20%, #F0D060 40%, #FFFFFF 50%, #F0D060 60%, #C9A84C 80%, #9A7A2E 100%);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerText 5s linear infinite;
+}
+
+.card-premium {
+  background: linear-gradient(145deg, #FFFFFF, #F8F5F0);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+.card-premium:hover {
+  border-color: rgba(201, 168, 76, 0.45);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), 0 0 40px rgba(201, 168, 76, 0.12);
+  transform: translateY(-6px);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #C9A84C 0%, #9A7A2E 50%, #C9A84C 100%);
+  background-size: 200% auto;
+  color: #1A1612;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background-position 0.5s ease, box-shadow 0.4s ease, transform 0.2s ease;
+}
+.btn-gold:hover {
+  background-position: right center;
+  box-shadow: 0 0 40px rgba(201, 168, 76, 0.45);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  color: #1C1C1A;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: border-color 0.3s, color 0.3s, transform 0.2s;
+}
+.btn-outline:hover {
+  border-color: #C9A84C;
+  color: #C9A84C;
+  transform: translateY(-2px);
+}
+
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), transparent);
+}
