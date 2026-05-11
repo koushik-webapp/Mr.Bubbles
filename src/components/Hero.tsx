@@ -43,24 +43,25 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden"
+      className="relative min-h-dvh overflow-hidden"
       style={{ background: "linear-gradient(135deg, #FFFFFF 0%, #F5F8FF 50%, #EDF1FA 100%)" }}
     >
 
-      {/* ── Image — right 62% of screen, fully contained, zoomed out ── */}
-      <div className="absolute top-0 right-0 bottom-0 w-[62%] pointer-events-none z-[1]">
+      {/* ── Desktop: Image — right 62% of screen ── */}
+      <div className="hidden md:block absolute top-0 right-0 bottom-0 w-[62%] pointer-events-none z-[1]">
         <Image
           src="/images/hero-products.png"
           alt="Mr. Bubbles Premium Cleaning Products"
           fill
           className="object-contain object-center"
           priority
+          sizes="62vw"
         />
       </div>
 
-      {/* Left fade — stops cleanly before the image starts */}
+      {/* Left fade — desktop only, stops cleanly before the image starts */}
       <div
-        className="absolute inset-0 pointer-events-none z-[2]"
+        className="hidden md:block absolute inset-0 pointer-events-none z-[2]"
         style={{
           background:
             "linear-gradient(to right, #F5F8FF 0%, #F5F8FF 30%, rgba(245,248,255,0.4) 37%, transparent 43%)",
@@ -77,11 +78,11 @@ export default function Hero() {
         style={{ background: "linear-gradient(to top, rgba(245,248,255,0.90), transparent)" }}
       />
 
-      {/* ── Floating bubbles ── */}
+      {/* ── Floating bubbles — hidden on smallest screens to keep UI clean ── */}
       {BUBBLES.map((b, i) => (
         <div
           key={i}
-          className={`absolute rounded-full pointer-events-none ${b.cls}`}
+          className={`absolute rounded-full pointer-events-none hidden sm:block ${b.cls}`}
           style={{
             width:  b.size,
             height: b.size,
@@ -101,11 +102,11 @@ export default function Hero() {
       ))}
 
       {/* ── Content ── */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-14 min-h-screen flex flex-col">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-14 min-h-dvh flex flex-col">
 
-        {/* Text block — left-anchored */}
+        {/* Text block */}
         <div className="flex-1 flex flex-col justify-center pt-28 pb-8">
-          <div className="w-full max-w-[580px]">
+          <div className="w-full md:max-w-[580px] text-center md:text-left">
 
             {/* Heading */}
             <motion.h1
@@ -124,7 +125,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.19, ease: EASE }}
-              className="text-[#4A5280] text-[1rem] leading-relaxed mb-8 max-w-[420px]"
+              className="text-[#4A5280] text-[1rem] leading-relaxed mb-8 max-w-[420px] mx-auto md:mx-0"
             >
               Premium detergents, wholesale prices, fast delivery.
               <br />Your business, our priority.
@@ -135,7 +136,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.36, ease: EASE }}
-              className="flex flex-wrap gap-5 mb-10"
+              className="flex flex-wrap gap-5 mb-10 justify-center md:justify-start"
             >
               {TRUST.map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-center gap-2">
@@ -148,6 +149,23 @@ export default function Hero() {
             </motion.div>
 
           </div>
+
+          {/* Mobile-only product image — shown below text, hidden on desktop */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
+            className="md:hidden relative w-full max-w-sm mx-auto h-72 mt-2"
+          >
+            <Image
+              src="/images/hero-products.png"
+              alt="Mr. Bubbles Premium Cleaning Products"
+              fill
+              className="object-contain object-center"
+              priority
+              sizes="(max-width: 768px) 90vw"
+            />
+          </motion.div>
         </div>
 
       </div>

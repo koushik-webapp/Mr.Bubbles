@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -31,7 +31,7 @@ function VideoCard({ src, title, subtitle }: { src: string; title: string; subti
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
 
-  const handleMouseEnter = () => {
+  const startPlay = () => {
     const v = videoRef.current;
     if (!v) return;
     v.muted = false;
@@ -42,7 +42,7 @@ function VideoCard({ src, title, subtitle }: { src: string; title: string; subti
     setPlaying(true);
   };
 
-  const handleMouseLeave = () => {
+  const stopPlay = () => {
     const v = videoRef.current;
     if (!v) return;
     v.pause();
@@ -50,11 +50,16 @@ function VideoCard({ src, title, subtitle }: { src: string; title: string; subti
     setPlaying(false);
   };
 
+  const handleClick = () => {
+    playing ? stopPlay() : startPlay();
+  };
+
   return (
     <div
-      className="relative shrink-0 w-[200px] md:w-[220px] aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer group bg-[#0D1B4A]"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className="relative shrink-0 w-[200px] md:w-[220px] aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer group bg-[#0D1B4A] select-none"
+      onMouseEnter={startPlay}
+      onMouseLeave={stopPlay}
+      onClick={handleClick}
       style={{ boxShadow: "0 8px 32px rgba(13,27,74,0.25)" }}
     >
       <video
@@ -76,12 +81,20 @@ function VideoCard({ src, title, subtitle }: { src: string; title: string; subti
       {/* Bottom gradient */}
       <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-black/80 to-transparent" />
 
-      {/* Play button — hides when playing */}
-      <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${playing ? "opacity-0" : "opacity-100"}`}>
+      {/* Play / Pause button */}
+      <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-100 group-hover:opacity-0">
         <div className="w-14 h-14 rounded-full bg-white/25 backdrop-blur-sm border border-white/40 flex items-center justify-center">
-          <Play className="w-6 h-6 text-white fill-white ml-0.5" />
+          {playing
+            ? <Pause className="w-5 h-5 text-white fill-white" />
+            : <Play  className="w-6 h-6 text-white fill-white ml-0.5" />
+          }
         </div>
       </div>
+
+      {/* Mobile tap hint */}
+      <span className="absolute top-3 right-3 sm:hidden text-[10px] text-white/70 bg-black/40 rounded-full px-2 py-0.5 backdrop-blur-sm">
+        tap
+      </span>
 
       {/* Bottom info */}
       <div className="absolute bottom-0 inset-x-0 p-4">
@@ -129,8 +142,7 @@ export default function VideoSlider() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
-        className="flex justify-center gap-4 overflow-x-auto pb-2"
-        style={{ scrollbarWidth: "none" }}
+        className="flex justify-center gap-4 overflow-x-auto pb-2 scrollbar-hide"
       >
         {VIDEOS.map((v) => (
           <VideoCard key={v.id} src={v.src} title={v.title} subtitle={v.subtitle} />

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -60,8 +61,14 @@ export default function Features() {
       className="relative py-28 overflow-hidden"
     >
       {/* Background image */}
-      <div className="absolute inset-0">
-        <img src="/images/features-bg.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+      <div className="absolute inset-0" aria-hidden="true">
+        <Image
+          src="/images/features-bg.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -112,7 +119,7 @@ export default function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.12, ease: EASE }}
-              className="relative rounded-3xl p-8 overflow-hidden group bg-white border border-[#1A56DB]/10 hover:border-[#1A56DB]/30 hover:shadow-lg transition-all duration-400"
+              className="relative rounded-3xl p-8 overflow-hidden group bg-white border border-[#1A56DB]/10 hover:border-[#1A56DB]/30 hover:shadow-lg transition-all duration-[400ms]"
               style={{ boxShadow: "0 2px 20px rgba(26,86,219,0.04)" }}
             >
               {/* Hover wash */}

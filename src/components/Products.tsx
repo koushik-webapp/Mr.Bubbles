@@ -72,7 +72,7 @@ export default function Products() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.45, delay: i * 0.06 }}
-                  className="rounded-3xl overflow-hidden group bg-white border border-[#1A56DB]/10 hover:border-[#1A56DB]/30 hover:shadow-[0_20px_60px_rgba(26,86,219,0.1)] transition-all duration-400"
+                  className="rounded-3xl overflow-hidden group bg-white border border-[#1A56DB]/10 hover:border-[#1A56DB]/30 hover:shadow-[0_20px_60px_rgba(26,86,219,0.1)] transition-all duration-[400ms]"
                   style={{ boxShadow: "0 2px 20px rgba(26,86,219,0.04)" }}
                 >
                   {/* Product visual */}

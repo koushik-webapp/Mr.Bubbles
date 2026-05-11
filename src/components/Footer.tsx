@@ -12,6 +12,7 @@ const PHONE_DISPLAY = "+1 (862) 220-2266";
 export default function Footer() {
   return (
     <footer
+      id="contact"
       className="relative overflow-hidden"
       style={{ background: "linear-gradient(160deg, #0D1B4A 0%, #0A1535 50%, #071028 100%)" }}
     >

@@ -27,7 +27,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${bangers.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-[#050505] text-[#F0EDE8] antialiased overflow-x-hidden">
+      <body className="min-h-screen antialiased">
         {children}
       </body>
     </html>
