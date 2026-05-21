@@ -46,13 +46,21 @@ const Tab = ({
   return (
     <li
       ref={ref}
+      role="button"
+      tabIndex={0}
       onClick={onClick}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick?.(); } }}
       onMouseEnter={() => {
         if (!ref.current) return;
         const { width } = ref.current.getBoundingClientRect();
         setPosition({ width, opacity: 1, left: ref.current.offsetLeft });
       }}
-      className="relative z-10 block cursor-pointer px-4 py-1.5 text-[11px] font-medium tracking-[0.18em] uppercase text-[#6B6B62] hover:text-white transition-colors duration-200 mix-blend-normal md:px-5 md:py-2"
+      onFocus={() => {
+        if (!ref.current) return;
+        const { width } = ref.current.getBoundingClientRect();
+        setPosition({ width, opacity: 1, left: ref.current.offsetLeft });
+      }}
+      className="relative z-10 block cursor-pointer px-4 py-1.5 text-[11px] font-medium tracking-[0.18em] uppercase text-[#6B6B62] hover:text-white transition-colors duration-200 md:px-5 md:py-2"
     >
       {children}
     </li>

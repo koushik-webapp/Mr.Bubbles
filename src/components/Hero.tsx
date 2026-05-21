@@ -43,8 +43,10 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-dvh overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #FFFFFF 0%, #F5F8FF 50%, #EDF1FA 100%)" }}
+      className="relative w-full overflow-hidden"
+      style={{
+        background: "linear-gradient(135deg, #FFFFFF 0%, #F5F8FF 50%, #EDF1FA 100%)",
+      }}
     >
 
       {/* ── Desktop: Image — right 62% of screen ── */}
@@ -102,10 +104,10 @@ export default function Hero() {
       ))}
 
       {/* ── Content ── */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-14 min-h-dvh flex flex-col">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-14 min-h-dvh-safe flex flex-col">
 
         {/* Text block */}
-        <div className="flex-1 flex flex-col justify-center pt-28 pb-8">
+        <div className="flex-1 flex flex-col justify-center pt-24 pb-0 md:pt-28 md:pb-8">
           <div className="w-full md:max-w-[580px] text-center md:text-left">
 
             {/* Heading */}
@@ -136,7 +138,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.36, ease: EASE }}
-              className="flex flex-wrap gap-5 mb-10 justify-center md:justify-start"
+              className="flex flex-wrap gap-5 mb-3 md:mb-10 justify-center md:justify-start"
             >
               {TRUST.map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-center gap-2">
@@ -150,12 +152,13 @@ export default function Hero() {
 
           </div>
 
-          {/* Mobile-only product image — shown below text, hidden on desktop */}
+          {/* Mobile-only product image — full-bleed, breaks out of px-6 padding */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
-            className="md:hidden relative w-full max-w-sm mx-auto h-72 mt-2"
+            className="md:hidden relative h-80"
+            style={{ marginLeft: "-1.5rem", marginRight: "-1.5rem", width: "calc(100% + 3rem)" }}
           >
             <Image
               src="/images/hero-products.png"
@@ -163,19 +166,19 @@ export default function Hero() {
               fill
               className="object-contain object-center"
               priority
-              sizes="(max-width: 768px) 90vw"
+              sizes="100vw"
             />
           </motion.div>
         </div>
 
       </div>
 
-      {/* Bottom-right location tag */}
+      {/* Bottom-right location tag — hidden on xs to avoid overlap with mobile image */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
-        className="absolute bottom-7 right-8 z-10 flex items-center gap-2"
+        className="absolute bottom-7 right-8 z-10 hidden sm:flex items-center gap-2"
       >
         <div className="h-px w-6 bg-[#1A56DB]/40" />
         <span className="text-[11px] font-semibold tracking-[0.25em] text-[#4A5280] uppercase">

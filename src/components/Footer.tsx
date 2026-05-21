@@ -27,8 +27,8 @@ export default function Footer() {
       {/* Top divider */}
       <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, rgba(26,86,219,0.6), rgba(59,130,246,0.4), transparent)" }} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-        <div className="flex flex-col items-center gap-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 md:py-20">
+        <div className="flex flex-col items-center gap-8 md:gap-12">
 
           {/* Logo */}
           <motion.div

@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Play, Pause } from "lucide-react";
+import { Play } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -81,13 +81,10 @@ function VideoCard({ src, title, subtitle }: { src: string; title: string; subti
       {/* Bottom gradient */}
       <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-black/80 to-transparent" />
 
-      {/* Play / Pause button */}
-      <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-100 group-hover:opacity-0">
+      {/* Play / Pause button — hidden when playing (works on touch too), hides on hover for desktop */}
+      <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${playing ? "opacity-0 pointer-events-none" : "opacity-100 group-hover:opacity-0"}`}>
         <div className="w-14 h-14 rounded-full bg-white/25 backdrop-blur-sm border border-white/40 flex items-center justify-center">
-          {playing
-            ? <Pause className="w-5 h-5 text-white fill-white" />
-            : <Play  className="w-6 h-6 text-white fill-white ml-0.5" />
-          }
+          <Play className="w-6 h-6 text-white fill-white ml-0.5" />
         </div>
       </div>
 
@@ -107,7 +104,7 @@ function VideoCard({ src, title, subtitle }: { src: string; title: string; subti
 
 export default function VideoSlider() {
   return (
-    <div className="relative z-10 max-w-7xl mx-auto px-6 pb-20">
+    <div className="relative z-10 max-w-7xl mx-auto px-6 pb-10 md:pb-20">
       {/* Header row */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -136,22 +133,24 @@ export default function VideoSlider() {
         </span>
       </motion.div>
 
-      {/* Video row */}
+      {/* Video row — scroll container separated from flex so iOS can scroll to the start */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
-        className="flex justify-center gap-4 overflow-x-auto pb-2 scrollbar-hide"
+        className="overflow-x-auto pb-2 scrollbar-hide"
       >
-        {VIDEOS.map((v) => (
-          <VideoCard key={v.id} src={v.src} title={v.title} subtitle={v.subtitle} />
-        ))}
+        <div className="flex justify-center gap-4 w-max mx-auto">
+          {VIDEOS.map((v) => (
+            <VideoCard key={v.id} src={v.src} title={v.title} subtitle={v.subtitle} />
+          ))}
+        </div>
       </motion.div>
 
       {/* Divider */}
       <div
-        className="h-px max-w-xs mx-auto mt-16"
+        className="h-px max-w-xs mx-auto mt-8 md:mt-16"
         style={{ background: "linear-gradient(to right, transparent, #1A56DB, transparent)" }}
       />
     </div>

@@ -136,3 +136,61 @@ body {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), transparent);
 }
+
+/* ── Hero full-screen height — desktop only so mobile content flows naturally ── */
+@media (min-width: 768px) {
+  #home {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
+  }
+}
+
+/* ── Full-viewport height with dvh fallback — desktop only ── */
+@media (min-width: 768px) {
+  .min-h-dvh-safe {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100dvh;
+  }
+}
+
+/* ── Performance: GPU-accelerate marquee & spin animations ── */
+.animate-marquee {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.animate-spin-slow,
+.animate-spin-reverse {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* ── Accessibility: prevent double-tap zoom delay on tappable elements ── */
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* ── Accessibility: keyboard focus ring (only shown for keyboard navigation) ── */
+:focus-visible {
+  outline: 2px solid #C9A84C;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Accessibility: respect reduced-motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
+import { useRef, useState } from "react";
 import VideoSlider from "@/components/VideoSlider";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -73,9 +74,19 @@ const REVIEWS = [
 ];
 
 export default function Testimonials() {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScroll = () => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const progress = el.scrollLeft / (el.scrollWidth - el.clientWidth);
+    setActiveIndex(Math.round(progress * (REVIEWS.length - 1)));
+  };
+
   return (
     <section
-      className="relative py-28 overflow-hidden"
+      className="relative py-12 md:py-28 overflow-hidden"
       style={{ background: "#C9D8E8" }}
     >
       {/* Background decoration */}
@@ -90,7 +101,7 @@ export default function Testimonials() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -127,8 +138,66 @@ export default function Testimonials() {
           />
         </div>
 
-        {/* Reviews grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* ── Mobile carousel (hidden md+) ── */}
+        <div
+          ref={carouselRef}
+          onScroll={handleScroll}
+          className="md:hidden -mx-6 pl-5 pr-0 overflow-x-auto scrollbar-hide flex gap-3 snap-x snap-mandatory pb-3"
+        >
+          {REVIEWS.map((r) => (
+            <div
+              key={r.name}
+              className="snap-start shrink-0 w-[82vw] relative rounded-2xl p-5 bg-white border border-[#1A56DB]/10"
+              style={{ boxShadow: "0 2px 16px rgba(26,86,219,0.06)" }}
+            >
+              {/* Quote icon */}
+              <div className="absolute top-4 right-5 text-[#1A56DB]/10">
+                <Quote className="w-7 h-7" />
+              </div>
+
+              {/* Stars */}
+              <div className="flex gap-0.5 mb-3">
+                {Array.from({ length: r.rating }).map((_, j) => (
+                  <Star key={j} className="w-3 h-3 fill-[#1A56DB] text-[#1A56DB]" />
+                ))}
+              </div>
+
+              {/* Review text — clamped */}
+              <p className="text-[#4A5280] text-xs leading-relaxed mb-4 line-clamp-3">
+                &ldquo;{r.review}&rdquo;
+              </p>
+
+              {/* Author */}
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-[10px] font-bold text-white"
+                  style={{
+                    background: "linear-gradient(135deg, #1A56DB, #3B82F6)",
+                    boxShadow: "0 0 10px rgba(26,86,219,0.25)",
+                  }}
+                >
+                  {r.initials}
+                </div>
+                <div>
+                  <p className="text-[#0D1B4A] font-semibold text-xs">{r.name}</p>
+                  <p className="text-[#4A5280] text-[10px]">{r.location}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+          {/* Right-side breathing room so last card doesn't sit flush */}
+          <div className="shrink-0 w-4" aria-hidden="true" />
+        </div>
+
+        {/* Mobile counter */}
+        <div className="md:hidden flex justify-center mt-3">
+          <span className="text-[11px] font-semibold text-[#1A56DB] tabular-nums tracking-widest">
+            {activeIndex + 1} / {REVIEWS.length}
+          </span>
+        </div>
+
+        {/* ── Desktop grid (hidden on mobile) ── */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {REVIEWS.map((r, i) => (
             <motion.div
               key={r.name}
@@ -190,7 +259,7 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.45, duration: 0.6, ease: EASE }}
-          className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 text-center"
+          className="mt-8 md:mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 text-center"
         >
           <div className="flex gap-1">
             {Array.from({ length: 5 }).map((_, i) => (

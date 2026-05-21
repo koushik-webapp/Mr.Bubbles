@@ -82,7 +82,7 @@ export default function CTABanner() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
                 required
-                className="flex-1 bg-white border border-[#D8D4CE] focus:border-[#C9A84C]/50 text-[#1C1C1A] placeholder-[#A8A8A0] text-sm px-5 py-4 rounded-full outline-none transition-colors duration-300"
+                className="flex-1 bg-white border border-[#D8D4CE] focus:border-[#C9A84C]/60 text-[#1C1C1A] placeholder-[#A8A8A0] text-sm px-5 py-4 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/40 focus-visible:ring-offset-2 transition-colors duration-300"
               />
               <button
                 type="submit"

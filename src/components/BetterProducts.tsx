@@ -200,7 +200,7 @@ export default function BetterProducts() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Floating desc card */}
+            {/* Floating desc card — hidden on mobile where layout is single-column */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={active + "-desc"}
@@ -208,7 +208,7 @@ export default function BetterProducts() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.35, delay: 0.1, ease: EASE }}
-                className="absolute bottom-[6%] left-[4%] max-w-[200px] bg-white border border-[#C9A84C]/25 rounded-2xl px-4 py-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.1)]"
+                className="hidden lg:block absolute bottom-[6%] left-[4%] max-w-[200px] bg-white border border-[#C9A84C]/25 rounded-2xl px-4 py-3.5 shadow-[0_20px_40px_rgba(0,0,0,0.1)]"
               >
                 <p className="text-[10px] text-[#C9A84C] uppercase tracking-wider mb-1 font-semibold">
                   {current.label}
@@ -217,8 +217,11 @@ export default function BetterProducts() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Decorative ring */}
-            <div className="absolute w-[460px] h-[460px] rounded-full border border-[#C9A84C]/12 animate-spin-slow pointer-events-none" />
+            {/* Decorative ring — responsive so it never overflows the container */}
+            <div
+              className="absolute rounded-full border border-[#C9A84C]/12 animate-spin-slow pointer-events-none"
+              style={{ width: "min(460px, 90%)", height: "min(460px, 90%)" }}
+            />
           </div>
         </div>
       </div>

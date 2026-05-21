@@ -58,7 +58,7 @@ export default function Features() {
   return (
     <section
       id="about"
-      className="relative py-28 overflow-hidden"
+      className="relative py-12 md:py-28 overflow-hidden"
     >
       {/* Background image */}
       <div className="absolute inset-0" aria-hidden="true">
@@ -68,12 +68,13 @@ export default function Features() {
           fill
           className="object-cover"
           sizes="100vw"
+          priority
         />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-10 md:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
