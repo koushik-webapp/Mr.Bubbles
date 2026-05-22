@@ -14,6 +14,7 @@ const PRODUCTS = [
   { id: 7, name: "Pine-Sol",           category: "cleaning", subtitle: "Multi-Surface Cleaner & Deodorizer", size: "5 GAL", price: 50, image: "/images/product-pinesol.png",  badge: null,          zoom: 1    },
   { id: 8, name: "Dreft",              category: "laundry",  subtitle: "Gentle Baby Laundry Detergent",  size: "5 GAL", price: 50, image: "/images/product-dreft.png",    badge: null,          zoom: 1    },
   { id: 9, name: "Free & Clear",       category: "laundry",  subtitle: "Sensitive Skin Laundry Detergent", size: "5 GAL", price: 50, image: "/images/product-freeclear.png", badge: null,         zoom: 1    },
+  { id: 10, name: "Scented Beads",     category: "laundry",  subtitle: "Luxury Fragrance Booster Beads",   size: "24 OZ", price: 35, image: "/images/product-scented-beads.png", badge: "New",       zoom: 1    },
 ];
 
 export default function Products() {
